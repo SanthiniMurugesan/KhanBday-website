@@ -1,0 +1,210 @@
+@import url('https://fonts.googleapis.com/css2?family=Sacramento&family=Poppins:wght@300;400;500;600&display=swap');
+
+/* Reset */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+/* Body */
+
+body{
+    font-family:'Poppins',sans-serif;
+    background:linear-gradient(135deg,#FFE8D6,#FFF7FB,#EAFBF7);
+    overflow:hidden;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    height:100vh;
+}
+
+/* Pages */
+
+.page{
+    display:none;
+    justify-content:center;
+    align-items:center;
+    width:100%;
+    height:100vh;
+    padding:20px;
+    animation:fade .8s ease;
+}
+
+.page.active{
+    display:flex;
+}
+
+/* Card */
+
+.card{
+    width:100%;
+    max-width:420px;
+    background:#fff;
+    padding:30px 25px;
+    border-radius:25px;
+    text-align:center;
+    box-shadow:0 12px 35px rgba(0,0,0,.08);
+}
+
+.ending{
+    background:linear-gradient(135deg,#FFF8FB,#F8FFF8,#F4F0FF);
+}
+
+/* Headings */
+
+h1{
+    font-family:'Sacramento',cursive;
+    font-size:62px;
+    font-weight:400;
+    color:#ff6f91;
+    margin-bottom:8px;
+}
+
+h2{
+    font-size:24px;
+    font-weight:600;
+    color:#666;
+    margin-bottom:15px;
+}
+
+/* Text */
+
+p{
+    font-size:16px;
+    color:#555;
+    line-height:1.7;
+}
+
+/* Emoji */
+
+.emoji{
+    font-size:60px;
+    margin-bottom:15px;
+}
+
+.icon{
+    font-size:35px;
+    margin-bottom:15px;
+}
+
+/* Button */
+
+.next-btn{
+    margin-top:25px;
+    padding:13px 28px;
+    border:none;
+    border-radius:30px;
+    background:#ff8fab;
+    color:#fff;
+    font-size:16px;
+    font-weight:500;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.next-btn:hover{
+    background:#ff6f91;
+    transform:scale(1.05);
+}
+
+/* Footer */
+
+.footer{
+    margin-top:20px;
+    color:#666;
+    line-height:1.7;
+    font-size:15px;
+}
+
+/* Hearts Container */
+
+#hearts{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    pointer-events:none;
+    overflow:hidden;
+    z-index:999;
+}
+
+/* Floating Hearts */
+
+.heart{
+    position:absolute;
+    bottom:-40px;
+    opacity:.9;
+    animation:float linear infinite;
+}
+
+/* Fade Animation */
+
+@keyframes fade{
+
+    from{
+        opacity:0;
+        transform:translateY(30px);
+    }
+
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+
+}
+
+/* Floating Hearts Animation */
+
+@keyframes float{
+
+    0%{
+        transform:translateY(0) scale(.8);
+        opacity:0;
+    }
+
+    20%{
+        opacity:1;
+    }
+
+    100%{
+        transform:translateY(-120vh) scale(1.2);
+        opacity:0;
+    }
+
+}
+
+/* Mobile */
+
+@media(max-width:600px){
+
+    .card{
+        width:95%;
+        padding:25px 20px;
+    }
+
+    h1{
+        font-size:52px;
+    }
+
+    h2{
+        font-size:21px;
+    }
+
+    p{
+        font-size:15px;
+        line-height:1.6;
+    }
+
+    .next-btn{
+        width:100%;
+        font-size:15px;
+    }
+
+    .footer{
+        font-size:14px;
+    }
+
+}
