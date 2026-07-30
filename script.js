@@ -1,124 +1,109 @@
-// Select all pages
-const pages = document.querySelectorAll(".page");
-const heartsContainer = document.getElementById("hearts");
+const cards = document.querySelectorAll(".reveal");
+const hearts = document.getElementById("hearts");
 
-let currentPage = 0;
-let celebrationStarted = false;
+let current = 0;
 
-// Show first page
-pages[currentPage].classList.add("active");
+// Show first card
+cards[current].classList.add("show");
 
-// Next page
-function nextPage() {
+// Show cards one by one
+const reveal = setInterval(() => {
 
-    // Hide current page
-    pages[currentPage].classList.remove("active");
+    current++;
 
-    // Move to next page
-    currentPage++;
+    if(current < cards.length){
 
-    // Show next page
-    if (currentPage < pages.length) {
+        cards[current].classList.add("show");
 
-        pages[currentPage].classList.add("active");
-
-        // Celebration on final page
-        if (currentPage === pages.length - 1) {
-            startCelebration();
-        }
+        cards[current].scrollIntoView({
+            behavior:"smooth",
+            block:"center"
+        });
 
     }
 
-}
+    else{
 
-// Start celebration only once
-function startCelebration() {
+        clearInterval(reveal);
 
-    if (celebrationStarted) return;
+        startCelebration();
 
-    celebrationStarted = true;
+    }
+
+},3000);
+
+
+// Hearts
+
+function startCelebration(){
 
     createConfetti();
 
-    setInterval(createHeart, 350);
+    setInterval(createHeart,400);
 
 }
 
-// Floating Hearts
-function createHeart() {
+function createHeart(){
 
-    const heart = document.createElement("div");
+    const heart=document.createElement("div");
 
-    heart.className = "heart";
+    heart.className="heart";
 
-    const hearts = ["❤️","💖","💕","💗","🤍"];
+    const emojis=["❤️","💖","💕","💗","🤍"];
 
-    heart.innerHTML =
-        hearts[Math.floor(Math.random() * hearts.length)];
+    heart.innerHTML=
+    emojis[Math.floor(Math.random()*emojis.length)];
 
-    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.left=Math.random()*100+"vw";
 
-    heart.style.fontSize =
-        (18 + Math.random() * 18) + "px";
+    heart.style.fontSize=
+    (18+Math.random()*18)+"px";
 
-    heart.style.animationDuration =
-        (5 + Math.random() * 4) + "s";
+    heart.style.animationDuration=
+    (5+Math.random()*4)+"s";
 
-    heartsContainer.appendChild(heart);
+    hearts.appendChild(heart);
 
-    setTimeout(() => {
+    setTimeout(()=>{
 
         heart.remove();
 
-    }, 9000);
+    },8000);
 
 }
 
+
 // Confetti
-function createConfetti() {
 
-    const emojis = ["🎉","🎊","✨","🎂","💖"];
+function createConfetti(){
 
-    for (let i = 0; i < 120; i++) {
+    const emojis=["🎉","🎊","✨","💖","🎂"];
 
-        const confetti = document.createElement("div");
+    for(let i=0;i<120;i++){
 
-        confetti.innerHTML =
-            emojis[Math.floor(Math.random() * emojis.length)];
+        const confetti=document.createElement("div");
 
-        confetti.style.position = "fixed";
-        confetti.style.left = Math.random() * 100 + "vw";
-        confetti.style.top = "-30px";
-        confetti.style.fontSize =
-            (16 + Math.random() * 16) + "px";
-        confetti.style.pointerEvents = "none";
-        confetti.style.zIndex = "9999";
+        confetti.className="confetti";
+
+        confetti.innerHTML=
+        emojis[Math.floor(Math.random()*emojis.length)];
+
+        confetti.style.left=Math.random()*100+"vw";
+
+        confetti.style.fontSize=
+        (15+Math.random()*18)+"px";
+
+        confetti.style.animationDuration=
+        (3+Math.random()*2)+"s";
 
         document.body.appendChild(confetti);
 
-        let top = -30;
-        let left = parseFloat(confetti.style.left);
+        setTimeout(()=>{
 
-        const speed = 2 + Math.random() * 3;
-        const drift = (Math.random() - 0.5) * 0.5;
+            confetti.remove();
 
-        const fall = setInterval(() => {
-
-            top += speed;
-            left += drift;
-
-            confetti.style.top = top + "px";
-            confetti.style.left = left + "vw";
-
-            if (top > window.innerHeight) {
-
-                clearInterval(fall);
-                confetti.remove();
-
-            }
-
-        }, 20);
+        },5000);
 
     }
 
-             }
+}
