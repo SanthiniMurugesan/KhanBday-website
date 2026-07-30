@@ -30,7 +30,7 @@ const reveal = setInterval(() => {
 
     }
 
-},3000);
+},2000);
 
 
 // Hearts
@@ -68,7 +68,7 @@ function createHeart(){
 
         heart.remove();
 
-    },5000);
+    },2000);
 
 }
 
@@ -102,7 +102,7 @@ function createConfetti(){
 
             confetti.remove();
 
-        },3000);
+        },1000);
 
     }
 
