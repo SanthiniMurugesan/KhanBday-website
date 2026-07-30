@@ -68,7 +68,7 @@ function createHeart(){
 
         heart.remove();
 
-    },8000);
+    },5000);
 
 }
 
@@ -102,7 +102,7 @@ function createConfetti(){
 
             confetti.remove();
 
-        },5000);
+        },3000);
 
     }
 
