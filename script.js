@@ -3,73 +3,70 @@ const hearts = document.getElementById("hearts");
 
 let current = 0;
 
-// Show first card
-cards[current].classList.add("show");
-typeCard(cards[current]);
+showCard(current);
 
-// Show cards one by one
-const reveal = setInterval(() => {
+function showCard(index) {
+    const card = cards[index];
 
-    current++;
+    card.classList.add("show");
 
-    if (current < cards.length) {
+    card.scrollIntoView({
+        behavior: "smooth",
+        block: "center"
+    });
 
-        cards[current].classList.add("show");
-        typeCard(cards[current]);
+    typeCard(card, () => {
+        if (index + 1 < cards.length) {
+            setTimeout(() => {
+                showCard(index + 1);
+            }, 1200);
+        } else {
+            startCelebration();
+        }
+    });
+}
 
-        cards[current].scrollIntoView({
-            behavior: "smooth",
-            block: "center"
-        });
-
-    } else {
-
-        clearInterval(reveal);
-
-        startCelebration();
-
-    }
-
-}, 5000); // Change this to increase/decrease time between cards
-
-
-// =========================
-// Typing Effect
-// =========================
-function typeCard(card) {
+function typeCard(card, callback) {
 
     const elements = card.querySelectorAll("h1, h2, p");
 
-    elements.forEach((el) => {
+    let currentElement = 0;
 
-        const original = el.innerHTML;
-        el.innerHTML = "";
+    function typeNextElement() {
+
+        if (currentElement >= elements.length) {
+            callback();
+            return;
+        }
+
+        const el = elements[currentElement];
+        const text = el.textContent;
+
+        el.textContent = "";
 
         let i = 0;
 
-        function type() {
+        function typeLetter() {
 
-            if (i < original.length) {
-
-                el.innerHTML += original.charAt(i);
+            if (i < text.length) {
+                el.textContent += text.charAt(i);
                 i++;
-
-                setTimeout(type, 35); // Typing speed (smaller = faster)
-
+                setTimeout(typeLetter, 40);
+            } else {
+                currentElement++;
+                setTimeout(typeNextElement, 300);
             }
 
         }
 
-        type();
+        typeLetter();
+    }
 
-    });
-
+    typeNextElement();
 }
 
+// Hearts
 
-// =========================
-// Hearts Animation
-// =========================
 function startCelebration() {
 
     createConfetti();
@@ -86,31 +83,22 @@ function createHeart() {
 
     const emojis = ["❤️", "💖", "💕", "💗", "🤍"];
 
-    heart.innerHTML =
-        emojis[Math.floor(Math.random() * emojis.length)];
+    heart.innerHTML = emojis[Math.floor(Math.random() * emojis.length)];
 
     heart.style.left = Math.random() * 100 + "vw";
 
-    heart.style.fontSize =
-        (18 + Math.random() * 18) + "px";
+    heart.style.fontSize = (18 + Math.random() * 18) + "px";
 
-    heart.style.animationDuration =
-        (5 + Math.random() * 4) + "s";
+    heart.style.animationDuration = (5 + Math.random() * 4) + "s";
 
     hearts.appendChild(heart);
 
     setTimeout(() => {
-
         heart.remove();
-
     }, 2000);
 
 }
 
-
-// =========================
-// Confetti Animation
-// =========================
 function createConfetti() {
 
     const emojis = ["🎉", "🎊", "✨", "💖", "🎂"];
@@ -121,25 +109,18 @@ function createConfetti() {
 
         confetti.className = "confetti";
 
-        confetti.innerHTML =
-            emojis[Math.floor(Math.random() * emojis.length)];
+        confetti.innerHTML = emojis[Math.floor(Math.random() * emojis.length)];
 
         confetti.style.left = Math.random() * 100 + "vw";
 
-        confetti.style.fontSize =
-            (15 + Math.random() * 18) + "px";
+        confetti.style.fontSize = (15 + Math.random() * 18) + "px";
 
-        confetti.style.animationDuration =
-            (3 + Math.random() * 2) + "s";
+        confetti.style.animationDuration = (3 + Math.random() * 2) + "s";
 
         document.body.appendChild(confetti);
 
         setTimeout(() => {
-
             confetti.remove();
-
         }, 1000);
-
     }
-
 }
