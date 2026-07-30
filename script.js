@@ -19,7 +19,7 @@ function showCard(index) {
         if (index + 1 < cards.length) {
             setTimeout(() => {
                 showCard(index + 1);
-            }, 1200);
+            }, 1000);
         } else {
             startCelebration();
         }
@@ -95,7 +95,7 @@ function createHeart() {
 
     setTimeout(() => {
         heart.remove();
-    }, 2000);
+    }, 1000);
 
 }
 
