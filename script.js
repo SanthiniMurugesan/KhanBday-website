@@ -19,7 +19,7 @@ function showCard(index) {
         if (index + 1 < cards.length) {
             setTimeout(() => {
                 showCard(index + 1);
-            }, 1000);
+            }, 800);
         } else {
             startCelebration();
         }
@@ -95,7 +95,7 @@ function createHeart() {
 
     setTimeout(() => {
         heart.remove();
-    }, 1000);
+    }, 800);
 
 }
 
@@ -121,6 +121,6 @@ function createConfetti() {
 
         setTimeout(() => {
             confetti.remove();
-        }, 1000);
+        }, 800);
     }
 }
