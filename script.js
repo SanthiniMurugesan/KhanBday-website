@@ -19,7 +19,7 @@ function showCard(index) {
         if (index + 1 < cards.length) {
             setTimeout(() => {
                 showCard(index + 1);
-            }, 800);
+            }, 600);
         } else {
             startCelebration();
         }
@@ -54,7 +54,7 @@ function typeCard(card, callback) {
                 setTimeout(typeLetter, 40);
             } else {
                 currentElement++;
-                setTimeout(typeNextElement, 300);
+                setTimeout(typeNextElement, 200);
             }
 
         }
@@ -71,7 +71,7 @@ function startCelebration() {
 
     createConfetti();
 
-    setInterval(createHeart, 400);
+    setInterval(createHeart, 300);
 
 }
 
@@ -81,7 +81,7 @@ function createHeart() {
 
     heart.className = "heart";
 
-    const emojis = ["❤️", "💖", "💕", "💗", "🤍"];
+    const emojis = ["🥳", "💖", "✨️", "💗", "🤍"];
 
     heart.innerHTML = emojis[Math.floor(Math.random() * emojis.length)];
 
@@ -95,7 +95,7 @@ function createHeart() {
 
     setTimeout(() => {
         heart.remove();
-    }, 800);
+    }, 600);
 
 }
 
@@ -121,6 +121,6 @@ function createConfetti() {
 
         setTimeout(() => {
             confetti.remove();
-        }, 800);
+        }, 600);
     }
 }
